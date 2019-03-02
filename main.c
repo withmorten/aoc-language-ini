@@ -15,15 +15,18 @@ static char file_exists (char* filename) {
 }
 
 static void init () {
+  char ini_path[MAX_PATH];
+
   aoc_ini_init();
 
   if (*up_mod_game_dir[0] != '\0') {
-    char ini_path[MAX_PATH];
     // up_mod_game_dir contains trailing '\'
     sprintf(ini_path, "%s%s", *up_mod_game_dir, "language.ini");
-    if (file_exists(ini_path)) {
-      aoc_ini_load_strings(ini_path);
-    }
+  } else {
+    strcpy(ini_path, "language.ini");
+  }
+  if (file_exists(ini_path)) {
+    aoc_ini_load_strings(ini_path);
   }
 }
 
